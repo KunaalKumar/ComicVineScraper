@@ -24,7 +24,16 @@ public class SearchResults {
         Elements searchResults = doc.select("#js-sort-filter-results > li");
 
         for (Element result : searchResults) {
+            // Result Image
+            System.out.println(result.childNode(3).childNode(1).childNode(1).attr("src"));
+            // Result Name
+            System.out.println(result.childNode(3).childNode(3).childNode(0).toString().trim());
+            // Result type
+            // TODO: parse function to get result type, and additional information
+            System.out.println(result.childNode(3).childNode(5).childNode(1).childNode(0).toString().trim());
+            // Result link
             System.out.println(BASE_URI + result.children().attr("href"));
+            System.out.println();
         }
 
     }
