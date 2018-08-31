@@ -7,18 +7,25 @@ import java.io.IOException;
 
 public class SearchResults {
     public static void main(String[] args) throws IOException {
+        String BASE_URI = "https://comicvine.gamespot.com";
         String searchTerm = "Superman";
         int pageNumber = 1;
-        Document doc = Jsoup.connect("https://comicvine.gamespot.com/search/?i=&q=" +
+        Document doc = Jsoup.connect(BASE_URI + "/search/?i=&q=" +
                 searchTerm + "&page=" + pageNumber).get();
 
-        Elements searchResults = doc.select(".editorial .river .search-results");
+        // Test to get just the first result
+//        Element searchResult = doc.select("#js-sort-filter-results > li").first();
+//
+//        for (Node result : searchResult.children()) {
+//            System.out.println(result.attr("href"));
+//        }
 
-        for (Element result : searchResults
-        ) {
+        // Test to get all results from page 1
+        Elements searchResults = doc.select("#js-sort-filter-results > li");
 
-            result.text();
-
+        for (Element result : searchResults) {
+            System.out.println(BASE_URI + result.children().attr("href"));
         }
+
     }
 }
