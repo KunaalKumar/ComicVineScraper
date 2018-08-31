@@ -1,13 +1,19 @@
+import objects.SearchResult;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class SearchResults {
+
+    public static final String BASE_URI = "https://comicvine.gamespot.com";
+
+    public static ArrayList<SearchResult> resultObjs = new ArrayList<>();
+
     public static void main(String[] args) throws IOException {
-        String BASE_URI = "https://comicvine.gamespot.com";
         String searchTerm = "Superman";
         int pageNumber = 1;
         Document doc = Jsoup.connect(BASE_URI + "/search/?i=&q=" +
@@ -23,16 +29,16 @@ public class SearchResults {
         // Test to get all results from page 1
         Elements searchResults = doc.select("#js-sort-filter-results > li");
 
+        // Add search results to arraylist
         for (Element result : searchResults) {
-            // Result Image
-            System.out.println(result.childNode(3).childNode(1).childNode(1).attr("src"));
-            // Result Name
-            System.out.println(result.childNode(3).childNode(3).childNode(0).toString().trim());
-            // Result type
-            // TODO: parse function to get result type, and additional information
-            System.out.println(result.childNode(3).childNode(5).childNode(1).childNode(0).toString().trim());
-            // Result link
-            System.out.println(BASE_URI + result.children().attr("href"));
+            resultObjs.add(new SearchResult(result));
+        }
+
+        // Print out info for debugging
+        for (SearchResult result : resultObjs
+        ) {
+            System.out.println(result.getName());
+            System.out.println(result.getType());
             System.out.println();
         }
 
