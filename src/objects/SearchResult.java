@@ -9,13 +9,13 @@ public class SearchResult {
     String name;
     String imageUrl;
     String type;
+    String chipInfo;
     String resultUri;
 
     public SearchResult(Element result) {
         name = result.childNode(3).childNode(3).childNode(0).toString().trim();
         imageUrl = result.childNode(3).childNode(1).childNode(1).attr("src");
-        // TODO: parse function to get result type, and additional information
-        type = result.childNode(3).childNode(5).childNode(1).childNode(0).toString().trim();
+        setType(result.childNode(3).childNode(5).childNode(1).childNode(0).toString().trim());
         resultUri = BASE_URI + result.children().attr("href");
     }
 
@@ -31,11 +31,22 @@ public class SearchResult {
         return imageUrl;
     }
 
+    private void setType(String type) {
+        chipInfo = type;
+        String[] arr = type.split(" ");
+        this.type = arr[0];
+    }
+
+    // Character (14530 issues) (DC Comics)
     public String getType() {
         return type;
     }
 
     public String getResultUri() {
         return resultUri;
+    }
+
+    public String getChipInfo() {
+        return chipInfo;
     }
 }

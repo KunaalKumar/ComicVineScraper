@@ -19,13 +19,6 @@ public class SearchResults {
         Document doc = Jsoup.connect(BASE_URI + "/search/?i=&q=" +
                 searchTerm + "&page=" + pageNumber).get();
 
-        // Test to get just the first result
-//        Element searchResult = doc.select("#js-sort-filter-results > li").first();
-//
-//        for (Node result : searchResult.children()) {
-//            System.out.println(result.attr("href"));
-//        }
-
         // Test to get all results from page 1
         Elements searchResults = doc.select("#js-sort-filter-results > li");
 
@@ -38,7 +31,7 @@ public class SearchResults {
         for (SearchResult result : resultObjs
         ) {
             System.out.println(result.getName());
-            System.out.println(result.getType());
+            System.out.println(result.getType() + " --> " + result.getChipInfo());
             System.out.println();
         }
 
