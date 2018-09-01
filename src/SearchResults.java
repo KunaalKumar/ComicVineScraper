@@ -31,9 +31,9 @@ public class SearchResults {
         for (SearchResult result : resultObjs
         ) {
             System.out.println(result.getName());
+            System.out.println(result.getImageUrl());
             System.out.println(result.getType() + " --> " + result.getChipInfo());
             System.out.println();
         }
-
     }
 }
