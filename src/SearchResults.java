@@ -1,4 +1,5 @@
 import objects.SearchResult;
+import objects.Superhero;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,9 +10,10 @@ import java.util.ArrayList;
 
 public class SearchResults {
 
-    public static final String BASE_URI = "https://comicvine.gamespot.com";
+    private static final String BASE_URI = "https://comicvine.gamespot.com";
 
-    public static ArrayList<SearchResult> resultObjs = new ArrayList<>();
+    private static ArrayList<SearchResult> resultObjs = new ArrayList<>();
+    private static Superhero character;
 
     public static void main(String[] args) throws IOException {
         String searchTerm = "Superman";
@@ -27,13 +29,11 @@ public class SearchResults {
             resultObjs.add(new SearchResult(result));
         }
 
-        // Print out info for debugging
-        for (SearchResult result : resultObjs
-        ) {
-            System.out.println(result.getName());
-            System.out.println(result.getImageUrl());
-            System.out.println(result.getType() + " --> " + result.getChipInfo());
-            System.out.println();
-        }
+        doc = Jsoup.connect(resultObjs.get(0).getResultUri()).get();
+
+        Element result = doc.select("#default-content > aside > div:nth-child(5)").first();
+
+        character = new Superhero(result);
+        System.out.println("Superhero name: : " + character.getSuperName());
     }
 }
