@@ -33,7 +33,17 @@ public class SearchResults {
 
         Element result = doc.select("#default-content > aside > div:nth-child(5)").first();
 
+        // Test for character pojo
         character = new Superhero(result);
-        System.out.println("Superhero name: : " + character.getSuperName());
+        System.out.println("Superhero name: " + character.getSuperName());
+        System.out.println();
+        System.out.println("Real name: " + character.getRealName());
+        System.out.println();
+        System.out.println("Aliases");
+        for (String alias : character.getAliases()
+        ) {
+            System.out.println(alias);
+        }
+        System.out.println();
     }
 }
