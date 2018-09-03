@@ -13,7 +13,7 @@ public class SearchResultsMain {
     private static ArrayList<SearchResult> resultObjs = new ArrayList<>();
     private static Superhero character;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String searchTerm = "Superman";
         int pageNumber = 1;
 
@@ -25,7 +25,7 @@ public class SearchResultsMain {
             resultObjs.add(new SearchResult(result));
         }
 
-        Element result = ComicVineClient.getCharacter(resultObjs.get(0).getResultUri());
+        Element result = ComicVineClient.getCharacter(resultObjs.get(1).getResultUri());
 
         // Test for character pojo
         if (result != null) {

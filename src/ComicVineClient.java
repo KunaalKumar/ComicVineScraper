@@ -23,7 +23,6 @@ public class ComicVineClient {
             } else {
                 return null;
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,7 +32,7 @@ public class ComicVineClient {
     static Element getCharacter(String url) {
         try {
             Document doc = Jsoup.connect(url).get();
-            return doc.select("#default-content > aside > div:nth-child(5)").first();
+            return doc.getElementsByClass("wiki-details").get(0);
         } catch (IOException e) {
             e.printStackTrace();
         }
