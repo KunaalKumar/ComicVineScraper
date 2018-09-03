@@ -1,10 +1,16 @@
+/**
+ * Created for Ignis for Android
+ * Version : 1.0
+ * Created by Kunaal Kumar
+ */
+
 package objects;
 
 import org.jsoup.nodes.Element;
 
 public class SearchResult {
 
-    private final String BASE_URI = "https://comicvine.gamespot.com";
+    public static final String BASE_URI = "https://comicvine.gamespot.com";
 
     String name;
     String imageUrl;
