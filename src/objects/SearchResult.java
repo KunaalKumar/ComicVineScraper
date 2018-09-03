@@ -1,6 +1,6 @@
 /**
  * Created for Ignis for Android
- * Version : 1.0
+ * Version : 1.1
  * Created by Kunaal Kumar
  */
 
