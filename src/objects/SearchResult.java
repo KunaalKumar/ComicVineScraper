@@ -38,7 +38,7 @@ public class SearchResult {
 
     // Replace low res image with high res image
     private void setImageUri(String image) {
-        this.imageUrl = image.replaceAll("square_small", "scale_large");
+        this.imageUrl = image.replaceAll("square_small", "original");
     }
 
     public String getName() {
