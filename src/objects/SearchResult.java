@@ -18,14 +18,14 @@ public class SearchResult {
     int typeCode;
     int objectCode;
     String chipInfo;
-    String resultUri;
+    String resultUrl;
 
     public SearchResult(Element result) {
         name = result.childNode(3).childNode(3).childNode(0).toString().trim();
         setImageUri(result.childNode(3).childNode(1).childNode(1).attr("src"));
         setType(result.childNode(3).childNode(5).childNode(1).childNode(0).toString().trim());
-        resultUri = BASE_URI + result.children().attr("href");
-        String codes = resultUri.replaceAll("\\D", "");
+        resultUrl = BASE_URI + result.children().attr("href");
+        String codes = resultUrl.replaceAll("\\D", "");
         typeCode = Integer.parseInt(codes.substring(0, 4));
         objectCode = Integer.parseInt(codes.substring(4, codes.length()));
     }
@@ -53,8 +53,8 @@ public class SearchResult {
         return type;
     }
 
-    public String getResultUri() {
-        return resultUri;
+    public String getResultUrl() {
+        return resultUrl;
     }
 
     public String getChipInfo() {
