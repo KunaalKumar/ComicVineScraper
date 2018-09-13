@@ -19,6 +19,7 @@ public class Superhero {
     String realName;
     String[] aliases;
     Link publisher;
+    Link[] creators;
 
     public Superhero(Element result) {
         // Table cells = result.childNode(2).childNode(1)
@@ -37,6 +38,23 @@ public class Superhero {
                 result.childNode(3).childNode(1).childNode(7).childNode(3).childNode(1).childNode(1).childNode(0).childNode(0).toString().trim(),
                 result.childNode(3).childNode(1).childNode(7).childNode(3).childNode(1).childNode(1).childNode(0).attr("href")
         );
+
+        int oddCreators = result.childNode(3).childNode(1).childNode(9).childNode(3).childNode(1).childNodes().size();
+        if (oddCreators <= 1) {
+            creators = new Link[1];
+            creators[0] = new Link("None", null);
+        } else {
+            int creatorCounter = 0;
+            creators = new Link[oddCreators / 2];
+            for (int i = 1; i < oddCreators; i += 2) {
+                creators[creatorCounter] = new Link(
+                        result.childNode(3).childNode(1).childNode(9).childNode(3).childNode(1).childNode(i).childNode(0).childNode(0).toString().trim(),
+                        result.childNode(3).childNode(1).childNode(9).childNode(3).childNode(1).childNode(i).childNode(0).attr("href")
+                );
+                creatorCounter++;
+            }
+        }
+
     }
 
     public String getRealName() {
@@ -63,6 +81,10 @@ public class Superhero {
         return objectCode;
     }
 
+    public Link[] getCreators() {
+        return creators;
+    }
+
     // For debugging
     @Override
     public String toString() {
@@ -83,10 +105,13 @@ public class Superhero {
         }
         stringBuilder.append("\n");
         stringBuilder.append("-------Publisher-------\n");
-        stringBuilder.append(getPublisher().getName());
-        stringBuilder.append(getPublisher().getLink());
-        stringBuilder.append(getPublisher().getTypeCode());
-        stringBuilder.append(getPublisher().getObjectCode());
+        stringBuilder.append(getPublisher().getName()).append("\n");
+        stringBuilder.append(getPublisher().getLink()).append("\n");
+        stringBuilder.append("\n");
+        stringBuilder.append("-------Creators-------\n");
+        for (Link creator : getCreators()) {
+            stringBuilder.append(creator.getName()).append("\n");
+        }
         stringBuilder.append("\n");
         return stringBuilder.toString();
     }
